@@ -1,0 +1,81 @@
+* {
+  font-family: "Roboto Mono", monospace;
+}
+
+body {
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(16px + 2vmin);
+  color: white;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-header {
+    font-size: calc(36px + 2vmin);
+  }
+
+  &-main-container {
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+  }
+
+  &-words-card {
+    background-color: #eee;
+    text-align: left;
+    padding: 2rem 1.5rem;
+    font-size: calc(14px + 2vmin);
+    color: #222;
+    border-radius: 10px;
+  }
+
+  &-input-container {
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+#type-here {
+  border: none;
+  border-radius: 0.2rem;
+  font-size: calc(14px + 2vmin);
+  height: 5rem;
+  width: 85%;
+  margin: 2rem 0.5rem 2rem 0;
+  padding: 0 2rem;
+}
+
+#redo {
+  width: 15%;
+  margin: 2rem 1rem;
+  background-color: #a82186;
+  border: none;
+  border-radius: 0.2rem;
+  color: white;
+  font-size: 2rem;
+}
+
+.selected {
+  color: purple;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
