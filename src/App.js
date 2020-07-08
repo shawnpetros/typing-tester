@@ -92,7 +92,12 @@ function App() {
             ))}
           </div>
           <div className="App-input-container">
-            <input id="type-here" value={input} onChange={handleChange} />
+            <input
+              id="type-here"
+              value={input}
+              onChange={handleChange}
+              autoFocus
+            />
             <button id="redo" onClick={() => window.location.reload()}>
               redo
             </button>
