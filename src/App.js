@@ -2,11 +2,14 @@ import "./App.scss";
 
 import React from "react";
 import randomWords from "random-words";
+import { calc } from "./utils";
 
 function App() {
   const [start, setStart] = React.useState(null);
   const [wordCount, setWordCount] = React.useState(50);
   const [charCount, setCharCount] = React.useState(0);
+  const [WPM, setWPM] = React.useState(0);
+  const [ACC, setACC] = React.useState(0);
   const [input, setInput] = React.useState("");
   const [currentWord, setCurrentWord] = React.useState(0);
   const [words, setWords] = React.useState([]);
@@ -22,19 +25,6 @@ function App() {
     );
   }, [wordCount]);
 
-  const calc = () => {
-    const finish = Date.now();
-    const elapsed = (finish - start) / 1000 / 60;
-    console.log(elapsed);
-
-    const errors = words.length - words.filter((word) => word.correct).length;
-
-    // ( all typed / 5 - incorrect ) / time (min)
-    const WPM = (charCount / 5 - errors) / elapsed;
-
-    console.log(WPM);
-  };
-
   const handleChange = ({ target: { value } }) => {
     if (input === "" && currentWord === 0) {
       setStart(Date.now());
@@ -46,7 +36,10 @@ function App() {
       newWords[currentWord].correct =
         value.trim() === newWords[currentWord].word;
       if (currentWord + 1 === newWords.length) {
-        return calc();
+        const { acc, wpm } = calc(start, charCount, words);
+        setACC(parseInt(acc));
+        setWPM(parseInt(wpm));
+        return;
       }
       newWords[currentWord].selected = false;
       newWords[currentWord + 1].selected = true;
@@ -66,7 +59,9 @@ function App() {
       <section className="App-main-container">
         <div className="App-main-header">
           <div>10 / 25 / 50 / 100 / 250</div>
-          <div>WPM: 0 / ACC: 0</div>
+          <div>
+            WPM: <span>{WPM}</span> / ACC: <span>{ACC}</span>
+          </div>
         </div>
         <div className="App-words-card">
           <div>
