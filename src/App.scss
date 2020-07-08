@@ -79,3 +79,11 @@ body {
 .incorrect {
   color: red;
 }
+
+.word-count {
+  cursor: pointer;
+
+  &.active {
+    border-bottom: white 2px solid;
+  }
+}

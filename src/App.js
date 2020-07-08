@@ -1,8 +1,8 @@
 import "./App.scss";
 
 import React from "react";
-import randomWords from "random-words";
 import { calc } from "./utils";
+import randomWords from "random-words";
 
 function App() {
   const [start, setStart] = React.useState(null);
@@ -13,6 +13,8 @@ function App() {
   const [input, setInput] = React.useState("");
   const [currentWord, setCurrentWord] = React.useState(0);
   const [words, setWords] = React.useState([]);
+
+  const values = [10, 25, 50, 100, 250];
 
   React.useEffect(() => {
     const randWords = randomWords(wordCount);
@@ -39,6 +41,8 @@ function App() {
         const { acc, wpm } = calc(start, charCount, words);
         setACC(parseInt(acc));
         setWPM(parseInt(wpm));
+        setInput("");
+        setCurrentWord(0);
         return;
       }
       newWords[currentWord].selected = false;
@@ -58,7 +62,19 @@ function App() {
       </header>
       <section className="App-main-container">
         <div className="App-main-header">
-          <div>10 / 25 / 50 / 100 / 250</div>
+          <div>
+            {values.map((val, i) => (
+              <>
+                <span
+                  className={`word-count ${val === wordCount ? "active" : ""}`}
+                  onClick={() => setWordCount(val)}
+                >
+                  {val}
+                </span>
+                {`${i !== values.length - 1 ? " / " : ""}`}
+              </>
+            ))}
+          </div>
           <div>
             WPM: <span>{WPM}</span> / ACC: <span>{ACC}</span>
           </div>
@@ -77,7 +93,9 @@ function App() {
           </div>
           <div className="App-input-container">
             <input id="type-here" value={input} onChange={handleChange} />
-            <button id="redo">redo</button>
+            <button id="redo" onClick={() => window.location.reload()}>
+              redo
+            </button>
           </div>
         </div>
       </section>

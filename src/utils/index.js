@@ -6,7 +6,7 @@ export const calc = (start, charCount, words) => {
 
   // ( all typed / 5 - incorrect ) / time (min)
   const wpm = (charCount / 5 - errors) / elapsed;
-  const acc = errors / wordCount;
+  const acc = 100 - (errors / words.length) * 100;
 
   return { wpm, acc };
 };
